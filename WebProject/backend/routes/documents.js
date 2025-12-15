@@ -5,7 +5,6 @@ const Document = require('../models/Document');
 const jwt = require('jsonwebtoken');
 const fs = require('fs').promises;
 const path = require('path');
-const { ingestDocument, chunkText, deleteDocumentChunks } = require('../utils/rag');
 
 // Middleware to verify token
 const auth = (req, res, next) => {
@@ -85,12 +84,6 @@ router.post('/upload', auth, upload.single('document'), async (req, res) => {
             return res.status(400).json({ msg: 'Could not extract text from document' });
         }
 
-        // Chunk the text
-        const chunks = chunkText(text);
-        
-        // Ingest document with embeddings using RAG utility
-        const result = await ingestDocument(req.userId, chunks, req.file.originalname);
-
         // Save document metadata to MongoDB
         const document = new Document({
             userId: req.userId,
@@ -98,7 +91,7 @@ router.post('/upload', auth, upload.single('document'), async (req, res) => {
             originalName: req.file.originalname,
             fileType: req.file.mimetype,
             fileSize: req.file.size,
-            chromaId: result.docId
+            chromaId: 'basic-backend' // Placeholder since no RAG
         });
 
         await document.save();
@@ -107,13 +100,12 @@ router.post('/upload', auth, upload.single('document'), async (req, res) => {
         await fs.unlink(filePath);
 
         res.json({
-            msg: 'Document uploaded and processed successfully',
+            msg: 'Document uploaded successfully',
             document: {
                 id: document._id,
                 originalName: document.originalName,
                 fileSize: document.fileSize,
-                uploadedAt: document.uploadedAt,
-                chunksCreated: result.chunksCreated
+                uploadedAt: document.uploadedAt
             }
         });
     } catch (err) {
@@ -153,9 +145,6 @@ router.delete('/:documentId', auth, async (req, res) => {
         if (!document) {
             return res.status(404).json({ msg: 'Document not found' });
         }
-
-        // Delete from ChromaDB using RAG utility
-        await deleteDocumentChunks(req.userId, document.originalName);
 
         // Delete from MongoDB
         await Document.deleteOne({ _id: req.params.documentId });
