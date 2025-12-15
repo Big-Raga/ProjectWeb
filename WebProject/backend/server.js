@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const helmet = require('helmet'); // Security headers
 const authRoutes = require('./routes/auth');
+const chatRoutes = require('./routes/chat');
 const documentRoutes = require('./routes/documents');
 
 const app = express();
@@ -20,6 +21,7 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/academicbot
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/chat', chatRoutes);
 app.use('/api/documents', documentRoutes);
 
 // SSL/HTTPS Configuration Note:
