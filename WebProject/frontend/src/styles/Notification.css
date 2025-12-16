@@ -1,0 +1,41 @@
+.notification {
+  position: fixed;
+  top: clamp(60px, 10vw, 80px);
+  right: clamp(10px, 3vw, 20px);
+  left: auto;
+  background-color: var(--bg-secondary);
+  color: var(--text-main);
+  padding: clamp(12px, 2vw, 15px) clamp(20px, 3vw, 25px);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  min-width: clamp(200px, 40vw, 250px);
+  max-width: 90vw;
+}
+
+.notification.success {
+  border-left: 5px solid #0092B9;
+}
+
+.notification.error {
+  border-left: 5px solid #ff4444;
+}
+
+.notification-title {
+  margin: 0;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+}
+
+.notification-title.success {
+  color: var(--accent);
+}
+
+.notification-title.error {
+  color: #ff4444;
+}
+
+.notification-message {
+  margin: 5px 0 0;
+  color: var(--text-sub);
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+}
