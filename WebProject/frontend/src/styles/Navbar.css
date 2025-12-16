@@ -1,0 +1,145 @@
+.navbar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background: rgba(2, 6, 24, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 146, 185, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  z-index: 1100;
+  gap: 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.navbar-logo {
+  font-weight: bold;
+  font-size: 24px;
+  background: linear-gradient(135deg, #ffffff 0%, #0092B9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.5px;
+}
+
+.navbar-desktop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-link {
+  margin: 0 15px;
+  color: var(--text-sub);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #0092B9, #00c8ff);
+  transition: width 0.3s ease;
+}
+
+.navbar-link:hover {
+  color: var(--accent);
+}
+
+.navbar-link:hover::after {
+  width: 100%;
+}
+
+.navbar-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-main);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 5px 10px;
+  z-index: 1001;
+}
+
+.mobile-nav {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  gap: 0;
+  padding: 20px;
+  margin-top: 15px;
+  background: rgba(26, 35, 50, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 146, 185, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 146, 185, 0.2);
+  position: absolute;
+  top: 70px;
+  left: 0;
+  right: 0;
+}
+
+.mobile-nav.open {
+  display: flex;
+}
+
+.mobile-nav-link {
+  color: var(--text-sub);
+  font-weight: 500;
+  display: block;
+  padding: 12px 15px;
+  border-radius: 8px;
+  transition: all 0.3s;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 0;
+}
+
+.mobile-nav-link:last-child {
+  border-bottom: none;
+}
+
+.mobile-nav-link:hover {
+  background-color: rgba(0, 146, 185, 0.1);
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 15px 20px;
+    flex-wrap: nowrap;
+  }
+
+  .navbar-desktop {
+    display: none !important;
+  }
+  
+  .mobile-menu-btn {
+    display: block !important;
+  }
+
+  .mobile-nav {
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    right: 20px;
+    width: calc(100% - 40px);
+    max-width: none;
+  }
+}

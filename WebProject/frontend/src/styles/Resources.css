@@ -1,0 +1,37 @@
+.resources-container {
+  padding: 0;
+  margin-top: 90px;
+}
+
+.resources-title {
+  margin-bottom: 30px;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: clamp(15px, 3vw, 20px);
+}
+
+.resource-card {
+  background-color: var(--bg-secondary);
+  padding: clamp(15px, 3vw, 20px);
+  border-radius: 8px;
+}
+
+.resource-title {
+  color: var(--accent);
+  font-size: clamp(1rem, 2vw, 1.1rem);
+}
+
+.resource-description {
+  color: var(--text-sub);
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+  margin: 10px 0;
+}
+
+.resource-download-btn {
+  font-size: clamp(0.75rem, 1.5vw, 0.8rem);
+  padding: 5px 10px;
+}
