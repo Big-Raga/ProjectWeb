@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Chat = require('../models/Chat');
 const jwt = require('jsonwebtoken');
+const { ragQuery } = require('../utils/rag');
 
 // Middleware to verify token
 const auth = (req, res, next) => {
